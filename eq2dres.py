@@ -11,32 +11,33 @@ def frac(nom, denom, string=False):
             commonMult = nomMults[-i]
             hasCommonMult = True
             break
-
     # returns the simplified (or not) values in a tuble so it can be used later on.
     
     if (string): # gives the option to be returned in a string form.
         if (hasCommonMult):
             if (denom/commonMult == 1): # check to see if it can be returned in a non fraction form
                 return str(int(nom/commonMult))
-            else:
-                return str(int(nom/commonMult)) + '/' + str(int(denom/commonMult))
-        else:
-            if denom == 1: # check to see if it can be returned in a non fraction form
-                return str(int(nom))
-            else:
-                return str(int(nom)) + '/' + str(int(denom))
 
-    else:
+            elif (denom/commonMult == -1): # returns as non fraction if denominator is negative
+                return str(int(-nom/commonMult))
+            
+            elif (nom/commonMult < 0) and (denom/commonMult < 0): # inverts both signs if it's -x/-y
+                return str(int(-nom/commonMult)) + '/' + str(int(-denom/commonMult))
+
+            else: # returns in a simplified fraction form
+                return str(int(nom/commonMult)) + '/' + str(int(denom/commonMult))
+
+    else: # returns in tuple form
         if (hasCommonMult):
             if (denom/commonMult == 1): # check to see if it can be returned in a non fraction form
                 return int(nom/commonMult)
+
+            elif (denom/commonMult == -1): # so that negative divition can also be returned in a non fraction form.
+                return int(-nom/commonMult)
+            elif (nom/commonMult < 0) and (denom/commonMult < 0):
+                return int(-nom/commonMult), int(-denom/commonMult)
             else:
                 return (int(nom/commonMult), int(denom/commonMult))
-        else:
-            if denom == 1: # check to see if it can be returned in a non fraction form
-                return int(nom)
-            else:
-                return (int(nom), int(denom))
 
 
 
@@ -90,12 +91,7 @@ def f(a,b,c):
         print("x1: " + x1str)
         print("x2: " + x2str)
         print('Factorized form: ' + str(a) + '(x-(' + x1str + '))*(x-(' + x2str + '))')
-        #not done
-        """
-        if (type(x1) == int) and (type(x2) == int):
-            print("Factorized form:")
-            print(str(a) + "(x - " + str(x1) + ")(x - " + str(x2) + ")")
-        """
+        
     
     # If the result has only one solution
     elif (result == 0):
