@@ -50,11 +50,6 @@ def f(a,b,c):
     alphaStr = frac(-b, (2*a), True)
     betaStr = frac(-((b**2)-(4*a*c)), (4*a), True)
 
-    # checks if it's a decimal for when it is displayed
-    """if (int(alpha) != float(alpha)):
-        alphaStr = str(alpha.as_integer_ratio()[0]) + '/' + str(alpha.as_integer_ratio()[1])
-        betaStr = str(beta.as_integer_ratio()[0]) + '/' + str(beta.as_integer_ratio()[1])
-"""
     print('a:' + str(a), '; b:' + str(b), '; c:' + str(c)) # re-displays the numbers from the polynom
     print("Delta: " + str(result))
     print('Alpha: ' + str(alphaStr))
