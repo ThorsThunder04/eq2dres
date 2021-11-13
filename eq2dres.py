@@ -1,3 +1,36 @@
+def sqrt(num, string=False):
+
+    if (int(num**0.5) == float(num**0.5)): # returns the square root of the number if it is a simple root.
+        return int(num ** 0.5)
+    
+    tempDivided = num # will hold the number that will be devided multiple times.
+    # multCounts = [] # holds the numbers that are squarable
+    currentHighest = 1 # holds the highest square
+    lowestRemainingRoot = 1
+    simplifiable = None
+
+    for div in range(2, num): # iterates through numbers to find squares in the square root.
+        if ((tempDivided % div) == 0) and ((tempDivided/div % div) == 0):
+            currentHighest = div # saves the highest found square that will multiply the root.
+            lowestRemainingRoot = int((tempDivided/div)/div) # gets a value of the smallest remaining root after it finds the squares.
+            simplifiable = True # so that th function knows if the number can be simplified and which one to return at the end.
+
+        else:
+            continue
+
+    if (string): # for it to be displayed as a string
+        if (simplifiable):
+            return str(currentHighest) + '*sqrt(' + str(lowestRemainingRoot) + ')'
+        else:
+            return 'sqrt(' + str(num) + ')'
+    
+    else: # just return the results
+        if (simplifiable):
+            return currentHighest, lowestRemainingRoot
+        else:
+            return num ** 0.5 # will return a long decimal number. Trying to find a solution.
+
+
 
 def frac(nom, denom, string=False):
     nomMults = [i for i in range(1,abs(nom)+1) if (nom % i) == 0] # generates a list of whole multiples for the nominator
@@ -64,8 +97,8 @@ def f(a,b,c):
         x2 = (-b+result**0.5)/(2*a)
 
         #transformes the result into a string for an easier method of displaying the results
-        x1str = str(x1)
-        x2str = str(x2)
+        x1str = str(int(x1))
+        x2str = str(int(x2))
 
         # displays the numbers under fractions form
         if int(x1) != float(x1):
@@ -73,14 +106,14 @@ def f(a,b,c):
                 x1str = frac(int((-b-result**0.5)), (2*a), True) # displays simple values in fraction forme
             else:
                 # displays the number if it is a none rational square root in a none developped forme
-                x1str = '(' + str(-b) + ' - √' + str(result) + ')/' + str(2*a)
+                x1str = '(' + str(-b) + ' - ' + sqrt(result, True) + ')/' + str(2*a)
         
         if int(x2) != float(x2):
             if int(-b+result**0.5) == float(-b+result**0.5):
                 x2str = frac(int((-b+result**0.5)), (2*a), True) # displays simple values in fraction forme
             else:
                 # displays the number if it is a none rational square root in a none developped forme
-                x2str = '(' + str(-b) + ' + √' + str(result) + ')/' + str(2*a)
+                x2str = '(' + str(-b) + ' + ' + sqrt(result, True) + ')/' + str(2*a)
 
 
         print("x1: " + x1str)
